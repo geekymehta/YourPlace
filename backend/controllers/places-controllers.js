@@ -110,7 +110,7 @@ const createPlace = async (req, res, next) => {
     const sess = await mongoose.startSession();
     sess.startTransaction();
     await createdPlace.save({ session: sess });
-    user.places.push(createdPlace);  // this push() function is provided by mongoose that allows to establish a connection b/w the two models. Here it only grabs the objectID of the createdPlace and adds it to the places section in user object model
+    user.places.push(createdPlace);  // note: this is not a standard push() function; it is provided by mongoose that allows to establish a connection b/w the two models. Here it only grabs the objectID of the createdPlace and adds it to the places section in user object model
     await user.save({ session: sess });
     await sess.commitTransaction();
   } catch (err) {
